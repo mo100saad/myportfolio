@@ -19,7 +19,7 @@ Welcome to my **personal portfolio website**! 🚀 This site showcases my **proj
 | **Technology**   | **Details**                          |
 |-----------------|----------------------------------|
 | **Frontend**    | React.js                         |
-| **Backend**     | Node.js, Express *(if applicable)* |
+| **Backend**     | Python, Flask                    |
 | **Hosting**     | GitHub Pages / Vercel / Netlify  |
 | **Version Control** | Git & GitHub                 |
 
