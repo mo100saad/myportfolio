@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
-import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram} from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram, FaCanadianMapleLeaf, FaPhone} from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -51,15 +51,15 @@ const Footer = () => {
             <h3 className="footer-title">Contact Info</h3>
             <ul>
               <li>
-                <i className="fas fa-map-marker-alt"></i>
+                <i className="fas fa-map-marker-alt"><FaCanadianMapleLeaf/></i>
                 <span>Ottawa, Canada</span>
               </li>
               <li>
-                <i className="fas fa-envelope"></i>
+                <i className="fas fa-envelope"><FaEnvelope/></i>
                 <span>mohammadhsaad05@gmail.com</span>
               </li>
               <li>
-                <i className="fas fa-phone"></i>
+                <i className="fas fa-phone"> <FaPhone/></i>
                 <span>+1 (343) 551-7568</span>
               </li>
             </ul>

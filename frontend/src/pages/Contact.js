@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './Contact.css';
+import { FaCanadianMapleLeaf, FaGithub, FaLinkedin} from 'react-icons/fa';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -132,7 +133,9 @@ const Contact = () => {
             
             <div className="contact-details">
               <div className="contact-item">
-                <i className="fas fa-map-marker-alt"></i>
+                <i className="fas fa-map-marker-alt">
+                <FaCanadianMapleLeaf />
+                </i>
                 <span>Ottawa, Canada</span>
               </div>
               
@@ -150,9 +153,11 @@ const Contact = () => {
             <div className="social-links">
               <a href="https://github.com/mo100saad" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-github"></i>
+                  <FaGithub />
               </a>
               <a href="https://linkedin.com/in/mo100saad" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-linkedin"></i>
+                  <FaLinkedin />
               </a>
             </div>
           </motion.div>

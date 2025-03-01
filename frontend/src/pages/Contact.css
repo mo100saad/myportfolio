@@ -54,7 +54,7 @@
   }
   
   .contact-info {
-    background-color: white;
+    background-color: rgb(175, 255, 246);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
@@ -69,7 +69,7 @@
   
   .contact-info p {
     margin-bottom: 30px;
-    color: #666;
+    color: 666;
     line-height: 1.6;
   }
   
@@ -81,51 +81,91 @@
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    transition: transform 0.2s ease-in-out;
   }
   
+  .contact-item:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Icon Styling */
   .contact-item i {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(90deg, #4776E6, #8E54E9);
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(90deg, #fe0303, #ffffff);
+    
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     color: white;
     margin-right: 15px;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(71, 118, 230, 0.3);
   }
   
-  .contact-item span {
-    color: #555;
+  /* Hover effect for icon */
+  .contact-item:hover i {
+    background: linear-gradient(90deg, #4776E6, #8E54E9);
+    transform: rotate(360deg);
+    transition: transform 0.6s ease-in-out;
   }
+  
+  /* Contact text styling */
+  .contact-item span {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  /* Hover effect for text */
+  .contact-item:hover span {
+    color: #4776E6;
+  }
+  
   
   .social-links {
     display: flex;
-    gap: 15px;
+    gap: 20px; /* Increased spacing */
   }
   
+  /* Social Media Buttons */
   .social-links a {
-    width: 45px;
-    height: 45px;
+    width: 100px; /* Bigger button size */
+    height: 100px;
     border-radius: 50%;
     background-color: #f0f0f0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #333;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out, transform 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
   
+  /* Make FontAwesome Icons Larger */
+  .social-links a svg {
+    font-size: 2rem; /* Bigger FontAwesome icons */
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  /* Hover Effect: Bigger, Glow & Zoom */
   .social-links a:hover {
     background: linear-gradient(90deg, #4776E6, #8E54E9);
-    color: white;
-    transform: translateY(-3px);
+    transform: scale(1.5); /* Subtle zoom-in */
+    box-shadow: 0 7px 20px rgba(71, 118, 230, 0.4);
   }
   
+  /* Hover Effect on the Icon */
+  .social-links a:hover svg {
+    transform: scale(1.2); /* Make the icon grow slightly */
+  }
+  
+  
+  
   .contact-form-container {
-    background-color: white;
+    background-color: rgb(193, 226, 223);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
