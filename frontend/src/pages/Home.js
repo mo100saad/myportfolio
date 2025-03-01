@@ -7,7 +7,6 @@ const Home = () => {
   const blobRef = useRef(null);
 
   useEffect(() => {
-    // Optional: Add any animations or effects that should run when component mounts
     const handleMouseMove = (e) => {
       if (blobRef.current) {
         const { clientX, clientY } = e;
@@ -30,11 +29,11 @@ const Home = () => {
     <section className="hero-section" id="home">
       <div className="hero-content">
         <div className="hero-text">
-          <h1>Hi, I'm <span className="highlight">Your Name</span></h1>
+          <h1>Hi, I'm <span className="highlight">Mo</span></h1>
           <h2>Full Stack Developer</h2>
           <p>
-            I build modern, responsive web applications with a focus on creating
-            exceptional user experiences through clean code and innovative design.
+            I build modern, responsive fullstack applications with a focus on creating
+            exceptional user experiences through clean code and innovative design. <strong>TLDR: I'm good with computers ;)</strong>
           </p>
           <div className="hero-buttons">
             <Link to="/projects" className="btn btn-primary">View My Work</Link>

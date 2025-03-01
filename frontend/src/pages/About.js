@@ -68,7 +68,7 @@ const About = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.7 }}
             >
-              <img src="public/about-me.jpg" alt="Your Name" />
+              <img src="public/about-me.jpg" alt="Your Name image not displayed" />
             </motion.div>
             
             <motion.div 
@@ -77,17 +77,17 @@ const About = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.7 }}
             >
-              <h2>About Me</h2>
+              <h2>Who am I?</h2>
                 <p>
                     Hey there! I'm <strong>Mohammad</strong>, a passionate <strong>Full Stack Developer</strong> with a strong background in 
-                    <strong>backend engineering, cloud technologies, and AI-driven applications</strong>. I love turning complex problems 
+                    <strong> backend engineering, cloud technologies, and AI-driven applications</strong>. I love turning complex problems 
                     into seamless, scalable, and efficient solutions—whether it's building <strong>machine learning models</strong>, 
                     optimizing <strong>multithreaded systems</strong>, or creating <strong>high-performance web applications</strong>.
                 </p>
                 <p>
                     Currently pursuing a <strong>B.A. Honours in Computer Science</strong> at <strong>Carleton University</strong>, 
                     I have hands-on experience working with <strong>Python, Rust, C/C++, TypeScript, and Golang</strong>. My projects 
-                    range from an <strong>AI-powered UFC fight prediction model</strong> to a <strong>peer-to-peer networking system</strong> 
+                    range from an <strong>AI-powered UFC fight prediction model</strong> to a <strong>peer-to-peer networking system </strong> 
                     and an <strong>EV charger booking app</strong>. I specialize in <strong>React, Flask, Django, Spring Boot, AWS, Docker, 
                     and Kubernetes</strong>, ensuring that the applications I develop are both scalable and efficient.
                 </p>
@@ -97,7 +97,7 @@ const About = () => {
                     leading to more efficient decision-making across the organization.
                 </p>
                 <p>
-                    <strong>Outside of Tech:</strong>  
+                    <strong>Outside of Tech: </strong>  
                     When I'm not coding, you’ll find me:  
                     <ul>
                         <li>🏋️ Hitting the gym and practicing <strong>wrestling</strong> – I love the discipline and strategy it brings.</li>

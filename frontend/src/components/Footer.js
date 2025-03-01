@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
+import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram} from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -18,15 +19,19 @@ const Footer = () => {
             <div className="social-links">
               <a href="https://github.com/mo100saad" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-github"></i>
+                <FaGithub />
               </a>
               <a href="https://linkedin.com/in/mo100saad" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-linkedin"></i>
+                <FaLinkedin />
               </a>
               <a href="https://www.instagram.com/mo.saadd/" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-linkedin"></i>
+                <FaInstagram />
               </a>
               <a href="mailto:mohammadhsaad05@gmail.com">
                 <i className="far fa-envelope"></i>
+                <FaEnvelope />
               </a>
             </div>
           </div>
