@@ -1,6 +1,6 @@
 # 🌐 Mohammad Saad's Personal Portfolio
 
-![Portfolio Preview](images/portfolio-preview.png) <!-- Replace with an actual screenshot of your portfolio -->
+![Portfolio Preview](demoimages/website.png) 
 
 Welcome to my **personal portfolio website**! 🚀 This site showcases my **projects, skills, and experience** as a **Computer Science student specializing in AI & Machine Learning**. Built using **React.js and Tailwind CSS**, it is hosted online for easy access.
 
