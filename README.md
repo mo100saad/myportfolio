@@ -18,7 +18,7 @@ Welcome to my **personal portfolio website**! 🚀 This site showcases my **proj
 ## 🛠️ Tech Stack
 | **Technology**   | **Details**                          |
 |-----------------|----------------------------------|
-| **Frontend**    | React.js, Tailwind CSS           |
+| **Frontend**    | React.js                         |
 | **Backend**     | Node.js, Express *(if applicable)* |
 | **Hosting**     | GitHub Pages / Vercel / Netlify  |
 | **Version Control** | Git & GitHub                 |
