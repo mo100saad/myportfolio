@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://saadportfolio-q9a3.onrender.com/api';
 
 export function useApi(endpoint, options = {}) {
   const [data, setData] = useState(null);
