@@ -1,0 +1,133 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 1000;
+    transition: all 0.4s ease;
+  }
+  
+  .navbar.scrolled {
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 12px 0;
+  }
+  
+  .navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .logo-text .highlight {
+    background: linear-gradient(90deg, #4776E6, #8E54E9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+  }
+  
+  .nav-menu a {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .nav-menu a:hover,
+  .nav-menu a.active {
+    color: #4776E6;
+  }
+  
+  .nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #4776E6, #8E54E9);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-menu a:hover::after,
+  .nav-menu a.active::after {
+    width: 100%;
+  }
+  
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 1002;
+  }
+  
+  .bar {
+    height: 3px;
+    width: 100%;
+    background-color: #333;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .menu-toggle {
+      display: flex;
+    }
+    
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      height: 100vh;
+      background-color: white;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      padding-top: 80px;
+      transition: right 0.3s ease;
+      z-index: 1001;
+    }
+    
+    .nav-menu.active {
+      right: 0;
+    }
+    
+    .nav-menu ul {
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    
+    .menu-toggle.active .bar:first-child {
+      transform: translateY(9px) rotate(45deg);
+    }
+    
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .menu-toggle.active .bar:last-child {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+  }
