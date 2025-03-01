@@ -10,22 +10,22 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-grid">
           <div className="footer-about">
-            <h3 className="footer-title">Your<span className="highlight">Name</span></h3>
+            <h3 className="footer-title">Contact<span className="highlight"> Me</span></h3>
             <p>
-              A passionate frontend developer focused on creating intuitive, 
-              dynamic user experiences with modern web technologies.
+              This project took a long time, so if you're here and reading this THANK YOU!
+              Feel Free to use the scroll-to-the-top button or click on one of my socials!
             </p>
             <div className="social-links">
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/mo100saad" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-github"></i>
               </a>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+              <a href="https://linkedin.com/in/mo100saad" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-linkedin"></i>
               </a>
-              <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-twitter"></i>
+              <a href="https://www.instagram.com/mo.saadd/" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-linkedin"></i>
               </a>
-              <a href="mailto:your.email@example.com">
+              <a href="mailto:mohammadhsaad05@gmail.com">
                 <i className="far fa-envelope"></i>
               </a>
             </div>
@@ -47,23 +47,22 @@ const Footer = () => {
             <ul>
               <li>
                 <i className="fas fa-map-marker-alt"></i>
-                <span>New York, NY</span>
+                <span>Ottawa, Canada</span>
               </li>
               <li>
                 <i className="fas fa-envelope"></i>
-                <span>your.email@example.com</span>
+                <span>mohammadhsaad05@gmail.com</span>
               </li>
               <li>
                 <i className="fas fa-phone"></i>
-                <span>+1 (555) 123-4567</span>
+                <span>+1 (343) 551-7568</span>
               </li>
             </ul>
           </div>
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; {currentYear} YourName. All rights reserved.</p>
-          <p>Made with <span className="heart">❤</span> using React & Flask</p>
+          <p>&copy; {currentYear} Mohammad Saad. All rights reserved.</p>
         </div>
       </div>
     </footer>

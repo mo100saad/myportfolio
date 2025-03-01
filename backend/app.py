@@ -13,9 +13,13 @@ CORS(app)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # Change this according to your email provider
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER', 'your-email@gmail.com')
-app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASSWORD', 'your-app-password')
-app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('EMAIL_USER', 'your-email@gmail.com')
+app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
+app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('EMAIL_USER')
+
+# If any of these are missing, log a warning rather than using hardcoded values
+if not app.config['MAIL_USERNAME'] or not app.config['MAIL_PASSWORD']:
+    app.logger.warning('Email credentials not configured. Contact form will not send emails.')
 
 # SQLite database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///portfolio.db'
@@ -25,16 +29,17 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 mail = Mail(app)
 db = SQLAlchemy(app)
 
-# Define database models
 class ContactMessage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False, index=True)
     message = db.Column(db.Text, nullable=False)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    ip_address = db.Column(db.String(45))  # Store IP for spam prevention
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    is_read = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
-        return f'<ContactMessage {self.name}>'
+        return f'<ContactMessage {self.id}: {self.name}>'
     
     def to_dict(self):
         return {
@@ -42,27 +47,31 @@ class ContactMessage(db.Model):
             'name': self.name,
             'email': self.email,
             'message': self.message,
-            'timestamp': self.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+            'timestamp': self.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
+            'is_read': self.is_read
         }
 
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
+    title = db.Column(db.String(200), nullable=False, unique=True)
+    slug = db.Column(db.String(250), nullable=False, unique=True, index=True)
     description = db.Column(db.Text, nullable=False)
     technologies = db.Column(db.String(500), nullable=False)
     image_url = db.Column(db.String(500))
     project_url = db.Column(db.String(500))
     github_url = db.Column(db.String(500))
-    featured = db.Column(db.Boolean, default=False)
+    featured = db.Column(db.Boolean, default=False, index=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    order_priority = db.Column(db.Integer, default=0, index=True)  # For custom ordering
 
     def __repr__(self):
-        return f'<Project {self.title}>'
+        return f'<Project {self.id}: {self.title}>'
     
     def to_dict(self):
         return {
             'id': self.id,
             'title': self.title,
+            'slug': self.slug,
             'description': self.description,
             'technologies': json.loads(self.technologies),
             'image_url': self.image_url,
@@ -71,48 +80,23 @@ class Project(db.Model):
             'featured': self.featured,
             'created_at': self.created_at.strftime('%Y-%m-%d')
         }
-
-# Create the database tables and seed some example projects
-with app.app_context():
-    db.create_all()
     
-    # Check if we need to seed projects
-    if Project.query.count() == 0:
-        # Add sample projects
-        sample_projects = [
-            Project(
-                title="E-Commerce Website",
-                description="A full-stack e-commerce platform with product catalog, shopping cart, and checkout functionality.",
-                technologies=json.dumps(["React", "Node.js", "MongoDB", "Express", "Stripe"]),
-                image_url="/images/projects/ecommerce.jpg",
-                project_url="https://example-ecommerce.com",
-                github_url="https://github.com/yourusername/ecommerce",
-                featured=True
-            ),
-            Project(
-                title="Task Management App",
-                description="A productivity app that helps users manage their tasks with features like drag-and-drop, filters, and statistics.",
-                technologies=json.dumps(["Vue.js", "Firebase", "Tailwind CSS"]),
-                image_url="/images/projects/task-app.jpg",
-                project_url="https://task-manager-example.com",
-                github_url="https://github.com/yourusername/task-manager",
-                featured=True
-            ),
-            Project(
-                title="Weather Dashboard",
-                description="A weather application that provides current conditions and forecasts for locations worldwide.",
-                technologies=json.dumps(["JavaScript", "OpenWeather API", "HTML/CSS"]),
-                image_url="/images/projects/weather.jpg",
-                project_url="https://weather-example.com",
-                github_url="https://github.com/yourusername/weather-app",
-                featured=False
-            )
-        ]
+    @staticmethod
+    def generate_slug(title):
+        """Generate a URL-friendly slug from the title"""
+        import re
+        from unidecode import unidecode
         
-        for project in sample_projects:
-            db.session.add(project)
+        # Convert to lowercase, replace spaces with hyphens
+        slug = re.sub(r'\s+', '-', unidecode(title).lower())
+        # Remove any non-alphanumeric characters except hyphens
+        slug = re.sub(r'[^a-z0-9-]', '', slug)
+        # Remove consecutive hyphens
+        slug = re.sub(r'-+', '-', slug)
+        # Remove leading and trailing hyphens
+        slug = slug.strip('-')
         
-        db.session.commit()
+        return slug
 
 @app.route('/api/contact', methods=['POST'])
 def contact():
@@ -183,5 +167,22 @@ def get_projects():
 def health_check():
     return jsonify({'status': 'UP', 'message': 'Flask server is running!'}), 200
 
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({'status': 'error', 'message': 'Resource not found'}), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    return jsonify({'status': 'error', 'message': 'Internal server error'}), 500
+
+# Add a before_request handler to validate JSON
+@app.before_request
+def validate_json():
+    if request.method == 'POST' and request.is_json:
+        try:
+            _ = request.get_json()
+        except Exception:
+            return jsonify({'status': 'error', 'message': 'Invalid JSON in request'}), 400
+        
 if __name__ == '__main__':
     app.run(debug=True)

@@ -5,23 +5,23 @@ import './About.css';
 
 const About = () => {
   const skills = [
-    { category: "Frontend", items: ["HTML5", "CSS3", "JavaScript", "React", "Vue.js", "Responsive Design", "Bootstrap", "Tailwind CSS"] },
-    { category: "Backend", items: ["Python", "Flask", "Node.js", "Express", "RESTful APIs", "GraphQL"] },
-    { category: "Database", items: ["MongoDB", "MySQL", "SQLite", "PostgreSQL", "Firebase"] },
-    { category: "Tools", items: ["Git", "GitHub", "VS Code", "Figma", "Postman", "Docker", "AWS"] }
+    { category: "Frontend", items: ["HTML5", "CSS3", "JavaScript", "React", "Responsive Design", "TypeScript", "Tailwind CSS"] },
+    { category: "Backend", items: ["Python","C/C++","Rust","Go","Flask", "Node.js", "Express", "RESTful APIs", "GraphQL"] },
+    { category: "Database", items: ["MongoDB","PowerBI","Tableau","MySQL", "SQLite", "AWS", "Firebase"] },
+    { category: "Frameworks, Libraries and Tools", items: ["PyTorch", "Django", "Spring Boot", "pandas", "Docker", "AWS (EC2, S3, Lambda, RDS, CloudWatch)", "Jenkins"] }
   ];
   
   const education = [
     {
-      degree: "BS in Computer Science",
-      institution: "University Name",
-      year: "2018 - 2022",
-      description: "Graduated with honors. Focused on web development, algorithms, and data structures."
+      degree: "BA Honours Computer Science AI and Machine Learning",
+      institution: "Carleton University",
+      year: "2023 - 2027",
+      description: "Coursework: Systems Programming, Discrete Structures, Abstract Data Types and Algorithms, Linear Algebra II"
     },
     {
       degree: "Web Development Bootcamp",
       institution: "Coding Academy",
-      year: "2022",
+      year: "2025",
       description: "Intensive 12-week program covering full-stack development technologies."
     }
   ];
@@ -77,33 +77,50 @@ const About = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.7 }}
             >
-              <h2>Full Stack Developer</h2>
-              <p>
-                Hello there! I'm a passionate Full Stack Developer with a strong foundation in both frontend and backend technologies. 
-                I love creating beautiful, functional websites and applications that solve real-world problems.
-              </p>
-              <p>
-                With a background in Computer Science and several years of hands-on experience, I specialize in building responsive 
-                web applications using modern frameworks and tools. I'm constantly learning and adapting to new technologies to deliver 
-                the best solutions for my clients and users.
-              </p>
-              <p>
-                When I'm not coding, you can find me exploring new hiking trails, experimenting with photography, or diving into a good book. 
-                I believe in maintaining a healthy work-life balance and finding inspiration in diverse experiences.
-              </p>
-              
+              <h2>About Me</h2>
+                <p>
+                    Hey there! I'm <strong>Mohammad</strong>, a passionate <strong>Full Stack Developer</strong> with a strong background in 
+                    <strong>backend engineering, cloud technologies, and AI-driven applications</strong>. I love turning complex problems 
+                    into seamless, scalable, and efficient solutions—whether it's building <strong>machine learning models</strong>, 
+                    optimizing <strong>multithreaded systems</strong>, or creating <strong>high-performance web applications</strong>.
+                </p>
+                <p>
+                    Currently pursuing a <strong>B.A. Honours in Computer Science</strong> at <strong>Carleton University</strong>, 
+                    I have hands-on experience working with <strong>Python, Rust, C/C++, TypeScript, and Golang</strong>. My projects 
+                    range from an <strong>AI-powered UFC fight prediction model</strong> to a <strong>peer-to-peer networking system</strong> 
+                    and an <strong>EV charger booking app</strong>. I specialize in <strong>React, Flask, Django, Spring Boot, AWS, Docker, 
+                    and Kubernetes</strong>, ensuring that the applications I develop are both scalable and efficient.
+                </p>
+                <p>
+                    In my current role as a <strong>Junior Data Analyst at the Department of National Defence</strong>, I enhance 
+                    data workflows, automate reporting processes, and develop <strong>interactive Power BI dashboards</strong>, 
+                    leading to more efficient decision-making across the organization.
+                </p>
+                <p>
+                    <strong>Outside of Tech:</strong>  
+                    When I'm not coding, you’ll find me:  
+                    <ul>
+                        <li>🏋️ Hitting the gym and practicing <strong>wrestling</strong> – I love the discipline and strategy it brings.</li>
+                        <li>👨‍👩‍👦 Spending time with <strong>family</strong> – my biggest support system.</li>
+                        <li>🌍 Exploring new ideas through <strong>books, photography, and deep conversations</strong>.</li>
+                    </ul>
+                </p>
+                <p>
+                    If you're interested in collaborating, feel free to reach out—I'm always up for a challenge and love building 
+                    meaningful projects!
+                </p>
               <div className="about-details">
                 <div className="detail-item">
-                  <strong>Name:</strong> Your Name
+                  <strong>Name:</strong> Mohammad "Mo" Saad
                 </div>
                 <div className="detail-item">
-                  <strong>Email:</strong> info@yourname.com
+                  <strong>Email:</strong> mohammadhsaad05@gmail.com
                 </div>
                 <div className="detail-item">
-                  <strong>Location:</strong> City, Country
+                  <strong>Location:</strong> Ottawa, Canada
                 </div>
                 <div className="detail-item">
-                  <strong>Availability:</strong> Freelance & Full-time
+                  <strong>Availability:</strong> Full Time for Co-Op Terms
                 </div>
               </div>
               

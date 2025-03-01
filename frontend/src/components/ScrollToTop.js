@@ -33,7 +33,8 @@ const ScrollToTop = () => {
       onClick={scrollToTop}
       aria-label="Scroll to top"
     >
-      <i className="fas fa-arrow-up"></i>
+      <i className="fas fa-arrow-up" aria-hidden="true"></i>
+      <span className="scroll-text">Click me to go top!</span>
     </button>
   );
 };

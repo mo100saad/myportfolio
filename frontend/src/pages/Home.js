@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaArrowDown } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope} from 'react-icons/fa';
 
 const Home = () => {
   const blobRef = useRef(null);
@@ -25,12 +25,6 @@ const Home = () => {
     };
   }, []);
 
-  const scrollToNextSection = () => {
-    const servicesSection = document.querySelector('.services-section');
-    if (servicesSection) {
-      servicesSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section className="hero-section" id="home">
@@ -68,10 +62,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="scroll-indicator" onClick={scrollToNextSection}>
-        <p>Scroll Down</p>
-        <FaArrowDown />
-      </div>
+      
 
       {/* Services Section */}
       <div className="services-section section" id="services">
@@ -199,6 +190,7 @@ const Home = () => {
             View All Projects
           </Link>
         </div>
+        
       </div>
 
       {/* CTA Section */}

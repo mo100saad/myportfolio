@@ -157,7 +157,7 @@ const Contact = () => {
             </div>
           </motion.div>
           
-          <motion.div 
+          <motion.div //CONTACT ME BUTTONS
             className="contact-form-container"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -171,27 +171,27 @@ const Contact = () => {
               )}
               
               <div className="form-group">
-                <label htmlFor="name">Mohammad Saad</label>
+                <label htmlFor="name">Name</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Mohammad Saad"
+                  placeholder="Enter your name"
                   required
                 />
               </div>
               
               <div className="form-group">
-                <label htmlFor="email">mohammadhsaad05@gmail.com</label>
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="mohammadhsaad05@gmail.com"
+                  placeholder="Enter your email"
                   required
                 />
               </div>

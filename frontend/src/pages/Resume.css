@@ -1,182 +1,273 @@
 .resume-section {
-    padding: 100px 0;
-    min-height: 100vh;
-    background-color: #f9f9f9;
+  padding: 40px 0;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #e8eaf6 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.resume-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  position: relative;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #333;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 3px;
+  background: linear-gradient(90deg, #4776E6, #8E54E9);
+  border-radius: 3px;
+}
+
+/* PDF Viewer Container Styles */
+.pdf-container {
+  width: 100%;
+  max-width: 900px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  height: calc(100vh - 240px);
+  min-height: 600px;
+}
+
+.pdf-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #4776E6, #8E54E9);
+  z-index: 1;
+}
+
+/* Corner fold effect */
+.corner-fold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 30px 30px 0;
+  border-color: transparent #8E54E9 transparent transparent;
+  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+/* Animated page edges for 3D effect */
+.page-edge {
+  position: absolute;
+  background-color: white;
+  transition: box-shadow 0.3s ease;
+}
+
+.page-edge.top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.page-edge.right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+.page-edge.bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.page-edge.left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+.resume-pdf-viewer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+.pdf-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  color: #666;
+  font-size: 1.2rem;
+  gap: 20px;
+}
+
+/* Loading animation */
+.loading-animation {
+  display: flex;
+  gap: 8px;
+}
+
+.circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #4776E6, #8E54E9);
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+.circle:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.circle:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
   }
-  
-  .resume-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.download-resume {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.resume-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 35px;
+  background: linear-gradient(90deg, #4776E6, #8E54E9);
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(71, 118, 230, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Download icon styles - initially hidden or small */
+.btn-icon {
+  transform: scale(0.8); /* Start slightly smaller */
+  opacity: 0.7; /* Start slightly transparent */
+}
+
+/* Button hover effects */
+.resume-btn:hover {
+  transform: translateY(-5px); /* Increased movement for more obvious effect */
+  box-shadow: 0 15px 25px rgba(71, 118, 230, 0.6); /* More pronounced shadow */
+  background: linear-gradient(90deg, #3867D6, #7D4BD4); /* Slightly darker gradient on hover */
+  padding-right: 40px; /* Make space for the icon animation */
+}
+
+/* Text animation on hover */
+.resume-btn:hover .btn-text {
+  transform: translateX(-10px); /* Move text slightly left on hover */
+  letter-spacing: 1px; /* Increase letter spacing for emphasis */
+}
+
+/* Icon animation on hover */
+.resume-btn:hover .btn-icon {
+  transform: scale(1.2); /* Enlarge icon on hover */
+  opacity: 1; /* Full opacity */
+  margin-left: 5px; /* Add extra space between text and icon */
+  animation: bounce-icon 1s infinite; /* Add bouncing animation */
+}
+
+.resume-btn:hover::after {
+  opacity: 1;
+}
+
+/* Add pulsing highlight effect to download button */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 10px 20px rgba(71, 118, 230, 0.2);
+  }
+  50% {
+    box-shadow: 0 15px 30px rgba(71, 118, 230, 0.4);
+  }
+  100% {
+    box-shadow: 0 10px 20px rgba(71, 118, 230, 0.2);
+  }
+}
+
+@media (max-width: 900px) {
+  .pdf-container {
+    height: calc(100vh - 220px);
+    min-height: 500px;
+    padding: 15px;
   }
   
   .section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 60px;
-    position: relative;
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .resume-section {
+    padding: 20px 0;
   }
   
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70px;
-    height: 3px;
-    background: linear-gradient(90deg, #4776E6, #8E54E9);
+  .pdf-container {
+    height: calc(100vh - 180px);
+    min-height: 400px;
+    padding: 10px;
   }
   
-  .resume-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    margin-bottom: 60px;
-  }
-  
-  .resume-column h3 {
-    margin-bottom: 25px;
-    font-size: 1.6rem;
-    color: #333;
-  }
-  
-  .resume-item {
-    margin-bottom: 30px;
-    padding: 25px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .resume-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    background: linear-gradient(180deg, #4776E6, #8E54E9);
-  }
-  
-  .resume-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .resume-item h4 {
-    margin-bottom: 5px;
-    font-size: 1.2rem;
-    color: #333;
-  }
-  
-  .resume-item h5 {
+  .section-title {
+    font-size: 1.8rem;
     margin-bottom: 15px;
-    font-size: 0.9rem;
-    color: #666;
-  }
-  
-  .resume-institution {
-    font-weight: 600;
-    color: #4776E6;
-    margin-bottom: 10px;
-  }
-  
-  .resume-item ul {
-    padding-left: 20px;
-  }
-  
-  .resume-item li {
-    margin-bottom: 8px;
-  }
-  
-  .skills-section {
-    margin-top: 50px;
-  }
-  
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-  }
-  
-  .skill-category h4 {
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-    color: #333;
-  }
-  
-  .skill {
-    margin-bottom: 15px;
-  }
-  
-  .skill span {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-  }
-  
-  .skill-bar {
-    height: 10px;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  .skill-level {
-    height: 100%;
-    background: linear-gradient(90deg, #4776E6, #8E54E9);
-    border-radius: 5px;
-    animation: skillFill 1.5s ease-in-out;
-  }
-  
-  @keyframes skillFill {
-    from {
-      width: 0;
-    }
-  }
-  
-  .download-resume {
-    text-align: center;
-    margin-top: 50px;
   }
   
   .resume-btn {
-    display: inline-block;
-    padding: 12px 30px;
-    background: linear-gradient(90deg, #4776E6, #8E54E9);
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
-    font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 5px 15px rgba(71, 118, 230, 0.3);
+    padding: 10px 18px; /* Reduce padding slightly on smaller screens */
+    font-size: 0.9rem; /* Adjust font size */
   }
-  
-  .resume-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(71, 118, 230, 0.4);
-  }
-  
-  @media (max-width: 900px) {
-    .resume-grid, .skills-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .resume-section {
-      padding: 80px 0;
-    }
-  }
-  
-  @media (max-width: 600px) {
-    .section-title {
-      font-size: 2rem;
-    }
-    
-    .resume-item {
-      padding: 20px;
-    }
-  }
+}

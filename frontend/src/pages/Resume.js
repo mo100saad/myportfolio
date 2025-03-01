@@ -4,14 +4,35 @@ import './Resume.css';
 
 const Resume = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [pdfLoaded, setPdfLoaded] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
+    
+    // Check if PDF exists
+    const checkPdfExists = async () => {
+      try {
+        const response = await fetch('/files/resume.pdf');
+        if (response.ok) {
+          setPdfLoaded(true);
+        }
+      } catch (error) {
+        console.error('Error checking PDF:', error);
+      }
+    };
+    
+    checkPdfExists();
   }, []);
 
   const fadeIn = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 1.2 } }
+  };
+
+  const pulseAnimation = {
+    scale: [1, 1.05, 1],
+    transition: { duration: 2, repeat: Infinity }
   };
 
   return (
@@ -22,107 +43,104 @@ const Resume = () => {
         animate={isVisible ? "visible" : "hidden"}
         variants={fadeIn}
       >
-        <h2 className="section-title">My Resume</h2>
+        <motion.h2 
+          className="section-title"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          My Resume
+        </motion.h2>
         
-        <div className="resume-grid">
-          <div className="resume-column">
-            <h3 className="resume-subtitle">Education</h3>
-            <div className="resume-item">
-              <h4>Bachelor of Science in Computer Science</h4>
-              <h5>2018 - 2022</h5>
-              <p className="resume-institution">University of Technology</p>
-              <p>Graduated with honors. Specialized in web development and software engineering principles.</p>
-            </div>
-            
-            <div className="resume-item">
-              <h4>Full Stack Web Development Bootcamp</h4>
-              <h5>2022</h5>
-              <p className="resume-institution">Tech Academy</p>
-              <p>Intensive 12-week program focused on modern web technologies including React and Node.js.</p>
-            </div>
-          </div>
-
-          <div className="resume-column">
-            <h3 className="resume-subtitle">Professional Experience</h3>
-            <div className="resume-item">
-              <h4>Frontend Developer</h4>
-              <h5>2022 - Present</h5>
-              <p className="resume-institution">Tech Innovations Inc.</p>
-              <ul>
-                <li>Developed responsive web applications using React and Redux</li>
-                <li>Collaborated with UI/UX designers to implement modern interfaces</li>
-                <li>Improved website performance by 40% through code optimization</li>
-                <li>Led a team of 3 junior developers on client projects</li>
-              </ul>
-            </div>
-            
-            <div className="resume-item">
-              <h4>Web Development Intern</h4>
-              <h5>2021 - 2022</h5>
-              <p className="resume-institution">Digital Solutions LLC</p>
-              <ul>
-                <li>Assisted in developing and maintaining client websites</li>
-                <li>Gained hands-on experience with JavaScript frameworks</li>
-                <li>Participated in daily stand-ups and agile development processes</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="skills-section">
-          <h3 className="resume-subtitle">Skills</h3>
-          <div className="skills-grid">
-            <div className="skill-category">
-              <h4>Frontend</h4>
-              <div className="skill-bars">
-                <div className="skill">
-                  <span>React</span>
-                  <div className="skill-bar"><div className="skill-level" style={{ width: '95%' }}></div></div>
-                </div>
-                <div className="skill">
-                  <span>JavaScript</span>
-                  <div className="skill-bar"><div className="skill-level" style={{ width: '90%' }}></div></div>
-                </div>
-                <div className="skill">
-                  <span>HTML/CSS</span>
-                  <div className="skill-bar"><div className="skill-level" style={{ width: '95%' }}></div></div>
-                </div>
-                <div className="skill">
-                  <span>Tailwind CSS</span>
-                  <div className="skill-bar"><div className="skill-level" style={{ width: '85%' }}></div></div>
-                </div>
+        {/* PDF Display Container */}
+        <motion.div 
+          className="pdf-container"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          whileHover={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)', scale: 1.01 }}
+          onHoverStart={() => setIsHovering(true)}
+          onHoverEnd={() => setIsHovering(false)}
+        >
+          {pdfLoaded ? (
+            <iframe 
+              src="/files/resume.pdf" 
+              title="Resume PDF"
+              className="resume-pdf-viewer"
+            />
+          ) : (
+            <motion.div 
+              className="pdf-placeholder"
+              animate={{ 
+                backgroundColor: ['#f5f5f5', '#e8eaf6', '#f5f5f5'],
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              <div className="loading-animation">
+                <div className="circle"></div>
+                <div className="circle"></div>
+                <div className="circle"></div>
               </div>
-            </div>
-            
-            <div className="skill-category">
-              <h4>Backend</h4>
-              <div className="skill-bars">
-                <div className="skill">
-                  <span>Node.js</span>
-                  <div className="skill-bar"><div className="skill-level" style={{ width: '80%' }}></div></div>
-                </div>
-                <div className="skill">
-                  <span>Python/Flask</span>
-                  <div className="skill-bar"><div className="skill-level" style={{ width: '85%' }}></div></div>
-                </div>
-                <div className="skill">
-                  <span>MongoDB</span>
-                  <div className="skill-bar"><div className="skill-level" style={{ width: '75%' }}></div></div>
-                </div>
-                <div className="skill">
-                  <span>SQL</span>
-                  <div className="skill-bar"><div className="skill-level" style={{ width: '70%' }}></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+              <p>Resume PDF is loading...</p>
+            </motion.div>
+          )}
+          
+          {/* Corner fold effect */}
+          <div className="corner-fold"></div>
+          
+          {/* Animated page edges */}
+          <motion.div 
+            className="page-edge top"
+            animate={{ boxShadow: isHovering ? '0 5px 15px rgba(0,0,0,0.2)' : '0 2px 5px rgba(0,0,0,0.1)' }}
+          ></motion.div>
+          <motion.div 
+            className="page-edge right"
+            animate={{ boxShadow: isHovering ? '5px 0 15px rgba(0,0,0,0.2)' : '2px 0 5px rgba(0,0,0,0.1)' }}
+          ></motion.div>
+          <motion.div 
+            className="page-edge bottom"
+            animate={{ boxShadow: isHovering ? '0 -5px 15px rgba(0,0,0,0.2)' : '0 -2px 5px rgba(0,0,0,0.1)' }}
+          ></motion.div>
+          <motion.div 
+            className="page-edge left"
+            animate={{ boxShadow: isHovering ? '-5px 0 15px rgba(0,0,0,0.2)' : '-2px 0 5px rgba(0,0,0,0.1)' }}
+          ></motion.div>
+        </motion.div>
         
-        <div className="download-resume">
-          <a href="/files/resume.pdf" className="resume-btn" download>
-            Download Full Resume
-          </a>
-        </div>
+        <motion.div 
+          className="download-resume"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.9 }}
+        >
+          <motion.a 
+            href="/files/resume.pdf" 
+            className="resume-btn" 
+            download
+            whileHover={{ scale: 1.05, backgroundColor: '#6C5CE7' }}
+            whileTap={{ scale: 0.95 }}
+            animate={pulseAnimation}
+          >
+            <motion.span 
+              className="btn-text"
+              initial={{ x: 0 }}
+              whileHover={{ x: -8 }}
+            >
+              Download Resume
+            </motion.span>
+            <motion.span 
+              className="btn-icon"
+              initial={{ opacity: 0, x: -10 }}
+              whileHover={{ opacity: 1, x: 0 }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </motion.span>
+          </motion.a>
+        </motion.div>
       </motion.div>
     </section>
   );
