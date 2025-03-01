@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './Projects.css';
+import { useApi } from '../hooks/useApi'; /*TO FIX LATER */
 
 const Projects = () => {
+  
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,7 +15,8 @@ const Projects = () => {
     const fetchProjects = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000/api/projects');
+        const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
+        const response = await fetch(`${API_BASE_URL}/projects`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch projects');

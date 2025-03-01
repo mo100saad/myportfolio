@@ -64,7 +64,7 @@ const Home = () => {
         <div className="hero-image">
           <div className="blob-bg" ref={blobRef}></div>
           <div className="profile-image">
-            <img src="/images/profile.jpg" alt="Your Name" />
+            <img src={`${process.env.PUBLIC_URL}/images/profile.jpg`} alt="Mo Saad" />
           </div>
         </div>
       </div>

@@ -68,7 +68,7 @@ const About = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.7 }}
             >
-              <img src="/images/about-me.jpg" alt="Your Name" />
+              <img src="public/about-me.jpg" alt="Your Name" />
             </motion.div>
             
             <motion.div 

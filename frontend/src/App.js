@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes, FaHome, FaUser, FaCode, FaFileAlt, FaEnvelope } from 'react-icons/fa';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
 
 // Import pages
 import Home from './pages/Home';
@@ -28,114 +29,117 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="app">
-        <header className={`app-header ${scrollPosition > 100 ? 'scrolled' : ''}`}>
-          <Link to="/" className="logo">
-            <motion.span 
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              YourName
-            </motion.span>
-          </Link>
-          
-          {/* Mobile Menu Toggle */}
-          <div className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <FaTimes /> : <FaBars />}
-          </div>
-          
-          {/* Desktop Navigation */}
-          <nav className="desktop-nav">
-            <ul>
-              <NavItem to="/" icon={<FaHome />} text="Home" />
-              <NavItem to="/about" icon={<FaUser />} text="About" />
-              <NavItem to="/projects" icon={<FaCode />} text="Projects" />
-              <NavItem to="/resume" icon={<FaFileAlt />} text="Resume" />
-              <NavItem to="/contact" icon={<FaEnvelope />} text="Contact" />
-            </ul>
-          </nav>
-          
-          {/* Mobile Navigation */}
-          <AnimatePresence>
-            {isMenuOpen && (
-              <motion.nav 
-                className="mobile-nav"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
+    <ErrorBoundary>
+
+      <Router>
+        <div className="app">
+          <header className={`app-header ${scrollPosition > 100 ? 'scrolled' : ''}`}>
+            <Link to="/" className="logo">
+              <motion.span 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
               >
-                <ul>
-                  <NavItem 
-                    to="/" 
-                    icon={<FaHome />} 
-                    text="Home" 
-                    onClick={() => setIsMenuOpen(false)} 
-                  />
-                  <NavItem 
-                    to="/about" 
-                    icon={<FaUser />} 
-                    text="About" 
-                    onClick={() => setIsMenuOpen(false)} 
-                  />
-                  <NavItem 
-                    to="/projects" 
-                    icon={<FaCode />} 
-                    text="Projects" 
-                    onClick={() => setIsMenuOpen(false)} 
-                  />
-                  <NavItem 
-                    to="/resume" 
-                    icon={<FaFileAlt />} 
-                    text="Resume" 
-                    onClick={() => setIsMenuOpen(false)} 
-                  />
-                  <NavItem 
-                    to="/contact" 
-                    icon={<FaEnvelope />} 
-                    text="Contact" 
-                    onClick={() => setIsMenuOpen(false)} 
-                  />
-                </ul>
-              </motion.nav>
-            )}
-          </AnimatePresence>
-        </header>
-        
-        <main className="app-main">
-          <AnimatedRoutes />
-        </main>
-        
-        <footer className="app-footer">
-          <div className="footer-content">
-            <div className="footer-section">
-              <h3>YourName</h3>
-              <p>Creating innovative web solutions with passion and precision.</p>
+                YourName
+              </motion.span>
+            </Link>
+            
+            {/* Mobile Menu Toggle */}
+            <div className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              {isMenuOpen ? <FaTimes /> : <FaBars />}
             </div>
-            <div className="footer-section">
-              <h3>Quick Links</h3>
+            
+            {/* Desktop Navigation */}
+            <nav className="desktop-nav">
               <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/projects">Projects</Link></li>
-                <li><Link to="/resume">Resume</Link></li>
-                <li><Link to="/contact">Contact</Link></li>
+                <NavItem to="/" icon={<FaHome />} text="Home" />
+                <NavItem to="/about" icon={<FaUser />} text="About" />
+                <NavItem to="/projects" icon={<FaCode />} text="Projects" />
+                <NavItem to="/resume" icon={<FaFileAlt />} text="Resume" />
+                <NavItem to="/contact" icon={<FaEnvelope />} text="Contact" />
               </ul>
+            </nav>
+            
+            {/* Mobile Navigation */}
+            <AnimatePresence>
+              {isMenuOpen && (
+                <motion.nav 
+                  className="mobile-nav"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ul>
+                    <NavItem 
+                      to="/" 
+                      icon={<FaHome />} 
+                      text="Home" 
+                      onClick={() => setIsMenuOpen(false)} 
+                    />
+                    <NavItem 
+                      to="/about" 
+                      icon={<FaUser />} 
+                      text="About" 
+                      onClick={() => setIsMenuOpen(false)} 
+                    />
+                    <NavItem 
+                      to="/projects" 
+                      icon={<FaCode />} 
+                      text="Projects" 
+                      onClick={() => setIsMenuOpen(false)} 
+                    />
+                    <NavItem 
+                      to="/resume" 
+                      icon={<FaFileAlt />} 
+                      text="Resume" 
+                      onClick={() => setIsMenuOpen(false)} 
+                    />
+                    <NavItem 
+                      to="/contact" 
+                      icon={<FaEnvelope />} 
+                      text="Contact" 
+                      onClick={() => setIsMenuOpen(false)} 
+                    />
+                  </ul>
+                </motion.nav>
+              )}
+            </AnimatePresence>
+          </header>
+          
+          <main className="app-main">
+            <AnimatedRoutes />
+          </main>
+          
+          <footer className="app-footer">
+            <div className="footer-content">
+              <div className="footer-section">
+                <h3>YourName</h3>
+                <p>Creating innovative web solutions with passion and precision.</p>
+              </div>
+              <div className="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                  <li><Link to="/">Home</Link></li>
+                  <li><Link to="/about">About</Link></li>
+                  <li><Link to="/projects">Projects</Link></li>
+                  <li><Link to="/resume">Resume</Link></li>
+                  <li><Link to="/contact">Contact</Link></li>
+                </ul>
+              </div>
+              <div className="footer-section">
+                <h3>Contact</h3>
+                <p>info@yourname.com</p>
+                <p>+1 (555) 123-4567</p>
+              </div>
             </div>
-            <div className="footer-section">
-              <h3>Contact</h3>
-              <p>info@yourname.com</p>
-              <p>+1 (555) 123-4567</p>
+            <div className="footer-bottom">
+              <p>&copy; {new Date().getFullYear()} YourName. All rights reserved.</p>
             </div>
-          </div>
-          <div className="footer-bottom">
-            <p>&copy; {new Date().getFullYear()} YourName. All rights reserved.</p>
-          </div>
-        </footer>
-      </div>
-    </Router>
+          </footer>
+        </div>
+      </Router>
+    </ErrorBoundary>
   );
 }
 

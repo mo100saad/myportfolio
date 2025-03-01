@@ -69,7 +69,8 @@ const Contact = () => {
     setStatus({ type: '', message: '' });
     
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
+      const response = await fetch(`${API_BASE_URL}/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -132,29 +133,26 @@ const Contact = () => {
             <div className="contact-details">
               <div className="contact-item">
                 <i className="fas fa-map-marker-alt"></i>
-                <span>New York, NY</span>
+                <span>Ottawa, Canada</span>
               </div>
               
-              <div className="contact-item">
-                <i className="fas fa-envelope"></i>
-                <span>contact@yourname.com</span>
+              <div className="Email Contact">
+                <i className="Email Contact"></i>
+                <span>mohammadhsaad05@gmail.com</span>
               </div>
               
-              <div className="contact-item">
-                <i className="fas fa-phone"></i>
-                <span>+1 (555) 123-4567</span>
+              <div className="Phone Number">
+                <i className="Phone Number"></i>
+                <span>+1 (343)-551-7568</span>
               </div>
             </div>
             
             <div className="social-links">
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/mo100saad" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-github"></i>
               </a>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+              <a href="https://linkedin.com/in/mo100saad" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-linkedin"></i>
-              </a>
-              <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-twitter"></i>
               </a>
             </div>
           </motion.div>
@@ -173,27 +171,27 @@ const Contact = () => {
               )}
               
               <div className="form-group">
-                <label htmlFor="name">Your Name</label>
+                <label htmlFor="name">Mohammad Saad</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="John Doe"
+                  placeholder="Mohammad Saad"
                   required
                 />
               </div>
               
               <div className="form-group">
-                <label htmlFor="email">Your Email</label>
+                <label htmlFor="email">mohammadhsaad05@gmail.com</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="johndoe@example.com"
+                  placeholder="mohammadhsaad05@gmail.com"
                   required
                 />
               </div>
