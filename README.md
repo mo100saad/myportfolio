@@ -18,7 +18,7 @@ Welcome to my **personal portfolio website**! 🚀 This site showcases my **proj
 ## 🛠️ Tech Stack
 | **Technology**   | **Details**                          |
 |-----------------|----------------------------------|
-| **Frontend**    | React.js                         |
+| **Frontend**    | React.js, CSS                    |
 | **Backend**     | Python, Flask                    |
 | **Hosting**     | GitHub Pages / Vercel / Netlify  |
 | **Version Control** | Git & GitHub                 |
@@ -79,7 +79,6 @@ Want to personalize this portfolio? Modify the following files:
 | `src/components/About.js` | Update your bio and skills |
 | `src/components/Projects.js` | Add new projects with descriptions and links |
 | `src/assets/images/` | Change profile picture and portfolio images |
-| `config.js` *(if applicable)* | Customize metadata (SEO, social links, etc.) |
 
 ---
 
