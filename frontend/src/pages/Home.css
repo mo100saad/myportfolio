@@ -34,7 +34,7 @@
     font-size: 2rem;
     font-weight: 500;
     margin-bottom: 1.5rem;
-    color: var(--primary-color);
+    color: red;
   }
   
   .hero-text p {
@@ -55,17 +55,18 @@
   
   .social-icons {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
+    
   }
   
   .social-icons a {
-    font-size: 1.5rem;
+    font-size: 3rem;
     color: var(--dark-color);
     transition: color 0.3s, transform 0.3s;
   }
   
   .social-icons a:hover {
-    color: var(--primary-color);
+    color: lightpink;
     transform: translateY(-3px);
   }
   
@@ -98,7 +99,7 @@
     position: absolute;
     width: 450px;
     height: 450px;
-    background-color: var(--primary-color);
+    background-color: green;
     opacity: 0.1;
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
     z-index: 1;

@@ -46,7 +46,7 @@ const Home = () => {
             <a href="https://linkedin.com/in/mo100saad" target="_blank" rel="noopener noreferrer">
               <FaLinkedin />
             </a>
-            <a href="https://instagram.com/mo.saad" target="_blank" rel="noopener noreferrer">
+            <a href="https://instagram.com/mo.saadd" target="_blank" rel="noopener noreferrer">
               <FaInstagram />
             </a>
             <a href="mailto:mohammadhsaad05@gmail.com">

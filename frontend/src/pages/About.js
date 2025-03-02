@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaUserGraduate, FaBriefcase, FaCode, FaLaptopCode } from 'react-icons/fa';
+import { FaUserGraduate, FaBriefcase} from 'react-icons/fa';
 import './About.css';
+
 
 const About = () => {
   const skills = [
@@ -71,7 +72,7 @@ const About = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.7 }}
             >
-              <img src="public/files/mo.jpg" alt="Your Name image not displayed" />
+              <img src="/files/mosuit.jpg" alt="Your Name image not displayed" />
             </motion.div>
             
             <motion.div 
