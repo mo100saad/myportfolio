@@ -90,15 +90,12 @@ def get_all_projects(featured=None):
     try:
         query = Project.query
         if featured is not None:
-            query = query.filter_by(featured=featured)
-
+            query = query.filter(Project.featured == True) 
+        
         projects = query.order_by(Project.order_priority.asc()).all()
-
-        print("Projects Retrieved from DB:", [p.to_dict() for p in projects])
-
         return [project.to_dict() for project in projects]
     except Exception as e:
-        current_app.logger.error(f"Database error: {str(e)}")
+        app.logger.error(f"Database error: {str(e)}")
         return None
 
 def get_project_by_slug(slug):

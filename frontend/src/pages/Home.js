@@ -21,14 +21,18 @@ const Home = () => {
         const data = await response.json();
 
         if (data.status === 'success' && data.projects) {
-          // Filter for UFC and P2P projects
-          const filteredProjects = data.projects.filter(
-            (project) =>
-              project.title.toLowerCase().includes('ufc') ||
-              project.title.toLowerCase().includes('p2p')
-          );
-
-          setProjects(filteredProjects);
+          // If fewer than 2 featured projects, fetch all projects up to 2
+          if (data.projects.length < 2) {
+            fetch(`${API_BASE_URL}/projects`)
+              .then(res => res.json())
+              .then(allData => {
+                if (allData.status === 'success') {
+                  setProjects(allData.projects.slice(0, 2));
+                }
+              });
+          } else {
+            setProjects(data.projects);
+          }
         } else {
           throw new Error('Invalid data format');
         }
