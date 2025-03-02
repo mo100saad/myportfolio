@@ -2,7 +2,7 @@
 .hero-section {
     min-height: 100vh;
     display: flex;
-    background-color: darkgrey;
+    background-color: rgba(156, 211, 206, 0.56);
     flex-direction: column;
     justify-content: center;
     position: relative;
@@ -222,7 +222,7 @@
   /* Featured Projects */
   .featured-projects-section {
     padding-bottom: 6rem;
-    background-color: darkgrey;
+    background-color: rgb(231, 199, 199);
     color: white;
   }
   

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram} from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram, FaLaptopCode, FaLaptopHouse, FaTruckPickup, FaAssistiveListeningSystems, FaAnchor} from 'react-icons/fa';
 
 const Home = () => {
   const blobRef = useRef(null);
@@ -71,7 +71,7 @@ const Home = () => {
         <div className="services-grid">
           <div className="service-card">
             <div className="service-icon web-design">
-              <i className="fas fa-desktop"></i>
+              <i className="fas fa-desktop"> <FaLaptopCode /> </i>
             </div>
             <h3>Web Design</h3>
             <p>
@@ -81,7 +81,7 @@ const Home = () => {
           </div>
           <div className="service-card">
             <div className="service-icon frontend">
-              <i className="fas fa-code"></i>
+              <i className="fas fa-code"> <FaLaptopHouse /> </i>
             </div>
             <h3>Frontend Development</h3>
             <p>
@@ -91,7 +91,7 @@ const Home = () => {
           </div>
           <div className="service-card">
             <div className="service-icon backend">
-              <i className="fas fa-server"></i>
+              <i className="fas fa-server"> <FaAnchor/> </i>
             </div>
             <h3>Backend Development</h3>
             <p>
