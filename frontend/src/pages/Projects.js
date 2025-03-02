@@ -14,7 +14,7 @@ const Projects = () => {
     const fetchProjects = async () => {
       try {
         setIsLoading(true);
-        const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
+        const API_BASE_URL = process.env.REACT_APP_API_URL;
         const response = await fetch(`${API_BASE_URL}/projects`);
         
         if (!response.ok) {

@@ -87,7 +87,7 @@ const Contact = () => {
     setStatus({ type: '', message: '' });
     
     try {
-      const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
+      const API_BASE_URL = process.env.REACT_APP_API_URL;
       const response = await fetch(`${API_BASE_URL}/contact`, {
         method: 'POST',
         headers: {
