@@ -2,6 +2,7 @@
 .hero-section {
     min-height: 100vh;
     display: flex;
+    background-color: darkgrey;
     flex-direction: column;
     justify-content: center;
     position: relative;
@@ -221,6 +222,8 @@
   /* Featured Projects */
   .featured-projects-section {
     padding-bottom: 6rem;
+    background-color: darkgrey;
+    color: white;
   }
   
   .project-grid {
@@ -316,7 +319,7 @@
   
   /* Technologies Section */
   .technologies-section {
-    background-color: var(--gray-color);
+    background-color: darkolivegreen;
   }
   
   .tech-grid {
