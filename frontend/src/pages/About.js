@@ -104,13 +104,13 @@ const About = () => {
                 </p>
                 <p>
                     <strong>Outside of Tech: </strong>  
-                    When I'm not coding, you’ll find me:  
-                    <ul>
-                        <li>🏋️ Hitting the gym and practicing <strong>wrestling</strong> – I love the discipline and strategy it brings.</li>
-                        <li>👨‍👩‍👦 Spending time with <strong>family</strong> – my biggest support system.</li>
-                        <li>🌍 Exploring new ideas through <strong>books, photography, and deep conversations</strong>.</li>
-                    </ul>
+                    When I'm not coding, you’ll find me:
                 </p>
+                <ul>
+                    <li>🏋️ Hitting the gym...</li>
+                    <li>👨‍👩‍👦 Spending time with family...</li>
+                    <li>🌍 Exploring new ideas...</li>
+                </ul>
                 <p>
                     If you're interested in collaborating, feel free to reach out—I'm always up for a challenge and love building 
                     meaningful projects!

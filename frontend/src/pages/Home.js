@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram, FaLaptopCode, FaLaptopHouse, FaTruckPickup, FaAssistiveListeningSystems, FaAnchor} from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram, FaLaptopCode, FaLaptopHouse, FaAnchor} from 'react-icons/fa';
 
 const Home = () => {
   const blobRef = useRef(null);

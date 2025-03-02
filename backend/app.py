@@ -85,17 +85,20 @@ class Project(db.Model):
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
 
-# Database functions
 def get_all_projects(featured=None):
-    """Retrieve projects from the database, with optional featured filter."""
+    """Retrieve projects from the database, sorted by order_priority."""
     try:
         query = Project.query
         if featured is not None:
             query = query.filter_by(featured=featured)
+
         projects = query.order_by(Project.order_priority.asc()).all()
+
+        print("Projects Retrieved from DB:", [p.to_dict() for p in projects])
+
         return [project.to_dict() for project in projects]
     except Exception as e:
-        app.logger.error(f"Database error: {str(e)}")
+        current_app.logger.error(f"Database error: {str(e)}")
         return None
 
 def get_project_by_slug(slug):
