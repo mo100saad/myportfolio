@@ -241,7 +241,7 @@ const Contact = () => {
               
               <div className={`form-group recaptcha-container ${captchaError ? 'captcha-error' : ''}`}>
                 <ReCAPTCHA
-                  sitekey="6LcRyuYqAAAAAIYMirYdJYFd0K8GEH8kKhfaG1z0"
+                  sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} 
                   onChange={handleCaptchaChange}
                 />
               </div>

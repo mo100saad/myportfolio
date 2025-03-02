@@ -31,7 +31,7 @@ app.config['MAIL_PASSWORD'] = os.getenv('EMAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('EMAIL_USER')
 
 # reCAPTCHA configuration
-RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY', '6LcRyuYqAAAAAEaIa1T7FYb4o9h6TB9xj4JwfdlZ')
+RECAPTCHA_SECRET_KEY = os.getenv("RECAPTCHA_SECRET_KEY")
 
 # Check if email credentials exist
 if not app.config['MAIL_USERNAME'] or not app.config['MAIL_PASSWORD']:
