@@ -72,7 +72,9 @@ const About = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.7 }}
             >
-              <img src="/files/mosuit.jpg" alt="Your Name not displayed" />
+              <img src="/files/mo.jpg" alt="Your Name not displayed" />
+              <img src="/files/mosuit.jpg" alt="Mohammad Secondary" className="secondary-image" />
+
             </motion.div>
             
             <motion.div 

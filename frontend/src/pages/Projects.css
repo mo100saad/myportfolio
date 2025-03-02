@@ -32,29 +32,88 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 12px;
     margin-bottom: 40px;
   }
   
   .filter-btn {
-    padding: 8px 20px;
-    background-color: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 30px;
+    padding: 10px 18px;
     font-size: 0.9rem;
+    font-weight: 500;
+    border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    border-radius: 25px;
+    background: white;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+    text-transform: capitalize;
   }
   
+  /* Smooth hover effect with color shift */
   .filter-btn:hover {
-    background-color: #f0f0f0;
+    background: linear-gradient(90deg, #88d451, #8E54E9);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(72, 118, 230, 0.3);
+  }
+  
+  /* Add a glow effect for the active button */
+  .filter-btn.active {
+    background: linear-gradient(90deg, #6e6814, #442d6a);
+    color: white;
+    box-shadow: 0 0 10px rgba(234, 170, 121, 0.6);
+  }
+  
+  /* Animate button clicks */
+  .filter-btn:active {
+    transform: scale(0.95);
+  }
+  
+  /* Add a subtle hover animation */
+  @keyframes pulse {
+    0% { box-shadow: 0 0 8px rgba(74, 233, 106, 0.3); }
+    50% { box-shadow: 0 0 15px rgba(13, 67, 204, 0.5); }
+    100% { box-shadow: 0 0 8px rgba(21, 104, 107, 0.3); }
   }
   
   .filter-btn.active {
-    background: linear-gradient(90deg, #4776E6, #8E54E9);
-    color: white;
-    border-color: transparent;
+    animation: pulse 1.5s infinite alternate;
   }
+  
+  /* Responsive improvements */
+  @media (max-width: 900px) {
+    .filter-container {
+      gap: 8px;
+    }
+    
+    .filter-btn {
+      font-size: 0.85rem;
+      padding: 8px 15px;
+      min-width: 80px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .filter-container {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    
+    .filter-btn {
+      font-size: 0.8rem;
+      padding: 7px 12px;
+      min-width: 70px;
+    }
+  }
+  
   
   .projects-grid {
     display: grid;

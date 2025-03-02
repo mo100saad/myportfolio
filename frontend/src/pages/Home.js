@@ -5,7 +5,43 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram, FaLaptopCode, FaLaptopHo
 
 const Home = () => {
   const blobRef = useRef(null);
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchFeaturedProjects = async () => {
+      try {
+        const API_BASE_URL = process.env.REACT_APP_API_URL;
+        const response = await fetch(`${API_BASE_URL}/projects?featured=true`);
 
+        if (!response.ok) {
+          throw new Error('Failed to fetch projects');
+        }
+
+        const data = await response.json();
+
+        if (data.status === 'success' && data.projects) {
+          // Filter for UFC and P2P projects
+          const filteredProjects = data.projects.filter(
+            (project) =>
+              project.title.toLowerCase().includes('ufc') ||
+              project.title.toLowerCase().includes('p2p')
+          );
+
+          setProjects(filteredProjects);
+        } else {
+          throw new Error('Invalid data format');
+        }
+      } catch (err) {
+        setError(err.message);
+        console.error('Error fetching projects:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchFeaturedProjects();
+  }, []);
   useEffect(() => {
     const handleMouseMove = (e) => {
       if (blobRef.current) {
@@ -29,7 +65,7 @@ const Home = () => {
     <section className="hero-section" id="home">
       <div className="hero-content">
         <div className="hero-text">
-          <h1>Hi, I'm <span className="highlight">Mo</span></h1>
+          <h1>Hi, I'm <span className="highlight">Mo and i'm a:</span></h1>
           <h2>Full Stack Developer</h2>
           <p>
             I build modern, responsive fullstack applications with a focus on creating
@@ -57,7 +93,7 @@ const Home = () => {
         <div className="hero-image">
           <div className="blob-bg" ref={blobRef}></div>
           <div className="profile-image">
-            <img src={`${process.env.PUBLIC_URL}/files/mo.jpg`} alt="Mo Saad" />
+            <img src={`${process.env.PUBLIC_URL}/files/logo192.png`} alt="Mo Saad" />
           </div>
         </div>
       </div>
@@ -102,87 +138,51 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Featured Projects Section */}
-      <div className="featured-projects-section section" id="featured-projects">
-        <div className="section-title">
-          <h2>Featured Projects</h2>
-          <p>Some of my recent work</p>
-        </div>
-        <div className="project-grid">
-          <div className="project-card">
-            <div className="project-image">
-              <img src="/files/projects/ufc.jpg" alt="E-Commerce Website" />
-            </div>
-            <div className="project-content">
-              <h3>E-Commerce Website</h3>
-              <p>
-                A full-stack e-commerce platform with product catalog, shopping
-                cart, and checkout functionality.
-              </p>
-              <div className="tech-tags">
-                <span className="tech-tag">React</span>
-                <span className="tech-tag">RESTful API</span>
-                <span className="tech-tag">SQLite</span>
-                <span className="tech-tag">Flask</span>
-                <span className="tech-tag">PyTorch</span>
-                <span className="tech-tag">Node.js</span>
-              </div>
-              <div className="project-links">
-                <a
-                  href="https://example-ecommerce.com"
-                  className="project-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fas fa-external-link-alt"></i> Live Demo
-                </a>
-                <a
-                  href="https://github.com/yourusername/ecommerce"
-                  className="project-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fab fa-github"></i> View Code
-                </a>
-              </div>
-            </div>
+      {/* Featured Projects Section - Dynamic from Backend */}
+<div className="featured-projects-section section" id="featured-projects">
+  <div className="section-title">
+    <h2>Recent Projects</h2>
+    <p>Some of my latest work</p>
+  </div>
+
+  {isLoading ? (
+    <p className="loading">Loading projects...</p>
+  ) : error ? (
+    <p className="error-message">{error}</p>
+  ) : projects.length > 0 ? (
+    <div className="project-grid">
+      {projects.map((project) => (
+        <div className="project-card" key={project.id}>
+          <div className="project-image">
+            <img src={project.image_url || '/files/projects/placeholder.jpg'} alt={project.title} />
           </div>
-          <div className="project-card">
-            <div className="project-image">
-              <img src="/images/projects/task-app.jpg" alt="Task Management App" />
+          <div className="project-content">
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            <div className="tech-tags">
+              {project.technologies.map((tech, index) => (
+                <span key={index} className="tech-tag">{tech}</span>
+              ))}
             </div>
-            <div className="project-content">
-              <h3>Task Management App</h3>
-              <p>
-                A productivity app that helps users manage their tasks with features
-                like drag-and-drop, filters, and statistics.
-              </p>
-              <div className="tech-tags">
-                <span className="tech-tag">Vue.js</span>
-                <span className="tech-tag">Firebase</span>
-                <span className="tech-tag">Tailwind CSS</span>
-              </div>
-              <div className="project-links">
-                <a
-                  href="https://task-manager-example.com"
-                  className="project-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+            <div className="project-links">
+              {project.project_url && (
+                <a href={project.project_url} className="project-link" target="_blank" rel="noopener noreferrer">
                   <i className="fas fa-external-link-alt"></i> Live Demo
                 </a>
-                <a
-                  href="https://github.com/yourusername/task-manager"
-                  className="project-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+              )}
+              {project.github_url && (
+                <a href={project.github_url} className="project-link" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-github"></i> View Code
                 </a>
-              </div>
+              )}
             </div>
           </div>
         </div>
+      ))}
+    </div>
+  ) : (
+    <p className="no-projects">No recent projects found.</p>
+  )}
         <div className="view-all-projects">
           <Link to="/projects" className="btn btn-primary">
             View All Projects
