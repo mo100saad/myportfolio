@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState} from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
+import { ReactTyped } from "react-typed";  // Import Typed.js for the typing effect
 import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram, FaLaptopCode, FaLaptopHouse, FaAnchor} from 'react-icons/fa';
 
 const Home = () => {
@@ -69,8 +70,22 @@ const Home = () => {
     <section className="hero-section" id="home">
       <div className="hero-content">
         <div className="hero-text">
-          <h1>Hi, I'm <span className="highlight">Mo and i'm a:</span></h1>
-          <h2>Full Stack Developer</h2>
+          <h1>Hi, I'm <span className="highlight">Mo</span> and i'm a:</h1>
+          <h2>
+            <ReactTyped
+              strings={[
+                "Full Stack Developer",
+                "Software Engineer",
+                "Tech Enthusiast",
+                "AI Developer"
+              ]}
+              typeSpeed={80}
+              backSpeed={50}
+              backDelay={1500}
+              loop
+            />
+          </h2>
+
           <p>
             I build modern, responsive fullstack applications with a focus on creating
             exceptional user experiences through clean code and innovative design. <strong>TLDR: I'm good with computers ;)</strong>
