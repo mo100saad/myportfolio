@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './Contact.css';
 import { FaCanadianMapleLeaf, FaGithub, FaLinkedin} from 'react-icons/fa';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -16,12 +17,19 @@ const Contact = () => {
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const [captchaError, setCaptchaError] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleCaptchaChange = (token) => {
+    setCaptchaToken(token);
+    setCaptchaError(false);
   };
 
   const validateForm = () => {
@@ -58,6 +66,15 @@ const Contact = () => {
       return false;
     }
     
+    if (!captchaToken) {
+      setCaptchaError(true);
+      setStatus({
+        type: 'error',
+        message: 'Please complete the CAPTCHA verification'
+      });
+      return false;
+    }
+    
     return true;
   };
 
@@ -76,7 +93,10 @@ const Contact = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          recaptchaToken: captchaToken
+        })
       });
       
       const data = await response.json();
@@ -93,6 +113,11 @@ const Contact = () => {
           email: '',
           message: ''
         });
+        // Reset reCAPTCHA
+        if (window.grecaptcha) {
+          window.grecaptcha.reset();
+        }
+        setCaptchaToken(null);
       } else {
         setStatus({
           type: 'error',
@@ -162,7 +187,7 @@ const Contact = () => {
             </div>
           </motion.div>
           
-          <motion.div //CONTACT ME BUTTONS
+          <motion.div 
             className="contact-form-container"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -212,6 +237,13 @@ const Contact = () => {
                   rows="6"
                   required
                 ></textarea>
+              </div>
+              
+              <div className={`form-group recaptcha-container ${captchaError ? 'captcha-error' : ''}`}>
+                <ReCAPTCHA
+                  sitekey="6LcRyuYqAAAAAIYMirYdJYFd0K8GEH8kKhfaG1z0"
+                  onChange={handleCaptchaChange}
+                />
               </div>
               
               <button type="submit" className="submit-btn" disabled={isSubmitting}>

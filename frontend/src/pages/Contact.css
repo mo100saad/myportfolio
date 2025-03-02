@@ -125,7 +125,19 @@
     color: #4776E6;
   }
   
+  .recaptcha-container {
+    margin-bottom: 20px;
+  }
   
+  .captcha-error {
+    border: 1px solid #ff0000;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .captcha-error .g-recaptcha > div {
+    box-shadow: 0 0 4px #ff0000;
+  }
   .social-links {
     display: flex;
     gap: 20px; /* Increased spacing */

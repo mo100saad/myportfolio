@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
 import json
+import requests
 from dotenv import load_dotenv
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -28,6 +29,9 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = os.getenv('EMAIL_USER')
 app.config['MAIL_PASSWORD'] = os.getenv('EMAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('EMAIL_USER')
+
+# reCAPTCHA configuration
+RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY', '6LcRyuYqAAAAAEaIa1T7FYb4o9h6TB9xj4JwfdlZ')
 
 # Check if email credentials exist
 if not app.config['MAIL_USERNAME'] or not app.config['MAIL_PASSWORD']:
@@ -89,6 +93,22 @@ class Project(db.Model):
             'created_at': self.created_at.strftime('%Y-%m-%d')
         }
 
+def verify_recaptcha(token):
+    """Verify the reCAPTCHA token with Google's API"""
+    try:
+        response = requests.post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            data={
+                'secret': RECAPTCHA_SECRET_KEY,
+                'response': token
+            }
+        )
+        result = response.json()
+        return result.get('success', False)
+    except Exception as e:
+        app.logger.error(f"reCAPTCHA verification error: {str(e)}")
+        return False
+
 # Contact Form API
 @app.route('/api/contact', methods=['POST'])
 @limiter.limit("3 per minute")  # Max 3 contact form submissions per minute
@@ -98,12 +118,25 @@ def contact():
         name = data.get('name')
         email = data.get('email')
         message_text = data.get('message')
+        recaptcha_token = data.get('recaptchaToken')
 
         if not all([name, email, message_text]):
             return jsonify({'status': 'error', 'message': 'Missing required fields'}), 400
+            
+        # Verify reCAPTCHA
+        if not recaptcha_token:
+            return jsonify({'status': 'error', 'message': 'reCAPTCHA verification required'}), 400
+            
+        if not verify_recaptcha(recaptcha_token):
+            return jsonify({'status': 'error', 'message': 'reCAPTCHA verification failed'}), 400
 
         # Save to database
-        new_message = ContactMessage(name=name, email=email, message=message_text)
+        new_message = ContactMessage(
+            name=name, 
+            email=email, 
+            message=message_text,
+            ip_address=request.remote_addr
+        )
         db.session.add(new_message)
         db.session.commit()
 
@@ -125,6 +158,8 @@ def contact():
 
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
+# The rest of your code remains unchanged...
 
 # Fetch all messages
 @app.route('/api/messages', methods=['GET'])
