@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope} from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram} from 'react-icons/fa';
 
 const Home = () => {
   const blobRef = useRef(null);
@@ -40,16 +40,16 @@ const Home = () => {
             <Link to="/contact" className="btn btn-outline">Get In Touch</Link>
           </div>
           <div className="social-icons">
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/mo100saad" target="_blank" rel="noopener noreferrer">
               <FaGithub />
             </a>
-            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+            <a href="https://linkedin.com/in/mo100saad" target="_blank" rel="noopener noreferrer">
               <FaLinkedin />
             </a>
-            <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
-              <FaTwitter />
+            <a href="https://instagram.com/mo.saad" target="_blank" rel="noopener noreferrer">
+              <FaInstagram />
             </a>
-            <a href="mailto:your.email@example.com">
+            <a href="mailto:mohammadhsaad05@gmail.com">
               <FaEnvelope />
             </a>
           </div>
@@ -57,7 +57,7 @@ const Home = () => {
         <div className="hero-image">
           <div className="blob-bg" ref={blobRef}></div>
           <div className="profile-image">
-            <img src={`${process.env.PUBLIC_URL}/images/profile.jpg`} alt="Mo Saad" />
+            <img src={`${process.env.PUBLIC_URL}/files/mo.jpg`} alt="Mo Saad" />
           </div>
         </div>
       </div>
@@ -66,8 +66,7 @@ const Home = () => {
       {/* Services Section */}
       <div className="services-section section" id="services">
         <div className="section-title">
-          <h2>What I Do</h2>
-          <p>Services I offer to my clients</p>
+          <h2>What I Do Best:</h2>
         </div>
         <div className="services-grid">
           <div className="service-card">
@@ -87,7 +86,7 @@ const Home = () => {
             <h3>Frontend Development</h3>
             <p>
               Building responsive, interactive interfaces with modern frameworks
-              like React, Vue, and Angular.
+              like React, Angular, TypeScript and also integrating AWS services.
             </p>
           </div>
           <div className="service-card">
@@ -110,10 +109,9 @@ const Home = () => {
           <p>Some of my recent work</p>
         </div>
         <div className="project-grid">
-          {/* This will be populated dynamically from API later */}
           <div className="project-card">
             <div className="project-image">
-              <img src="/images/projects/ecommerce.jpg" alt="E-Commerce Website" />
+              <img src="/files/projects/ufc.jpg" alt="E-Commerce Website" />
             </div>
             <div className="project-content">
               <h3>E-Commerce Website</h3>
@@ -123,10 +121,11 @@ const Home = () => {
               </p>
               <div className="tech-tags">
                 <span className="tech-tag">React</span>
+                <span className="tech-tag">RESTful API</span>
+                <span className="tech-tag">SQLite</span>
+                <span className="tech-tag">Flask</span>
+                <span className="tech-tag">PyTorch</span>
                 <span className="tech-tag">Node.js</span>
-                <span className="tech-tag">MongoDB</span>
-                <span className="tech-tag">Express</span>
-                <span className="tech-tag">Stripe</span>
               </div>
               <div className="project-links">
                 <a

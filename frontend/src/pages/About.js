@@ -28,18 +28,21 @@ const About = () => {
   
   const experience = [
     {
-      position: "Frontend Developer",
-      company: "Tech Solutions Inc.",
-      year: "2022 - Present",
-      description: "Developing responsive web applications using React.js. Collaborating with cross-functional teams to implement new features and maintain existing codebase."
+      position: "Junior Data Analyst",
+      company: "Department of National Defence (VCDS)",
+      year: "Jan. 2025 – Present",
+      description:
+        "Analyzing large datasets to improve strategic decision-making across the VCDS branch. Developed Power BI dashboards that reduced reporting time by 40%, while automating workflows in Python to enhance efficiency.",
     },
     {
-      position: "Web Development Intern",
-      company: "Digital Innovations",
-      year: "2021 - 2022",
-      description: "Assisted in building websites and web applications. Gained hands-on experience with industry-standard tools and practices."
-    }
+      position: "Crew Supervisor",
+      company: "Crispys Resto Grill",
+      year: "Aug. 2020 – Jan. 2025",
+      description:
+        "Led a team of 8-10 employees, ensuring seamless operations and high customer satisfaction. Implemented workflow optimizations that enhanced restaurant efficiency and service speed.",
+    },
   ];
+  
   
   return (
     <motion.div 
@@ -68,7 +71,7 @@ const About = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.7 }}
             >
-              <img src="public/about-me.jpg" alt="Your Name image not displayed" />
+              <img src="public/files/mo.jpg" alt="Your Name image not displayed" />
             </motion.div>
             
             <motion.div 
