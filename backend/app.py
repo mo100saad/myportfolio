@@ -14,7 +14,7 @@ from flask_limiter.util import get_remote_address
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": ["https://myportfolio-lpcrjhbrc-mo100saads-projects.vercel.app", "http://localhost:3000"]}}) #FIX THIS
+CORS(app, resources={r"/api/*": {"origins": ["https://myportfoliomosaad.vercel.app", "http://localhost:3000"]}})
 
 limiter = Limiter(
     get_remote_address,
