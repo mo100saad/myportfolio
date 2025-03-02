@@ -4,12 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
 from datetime import datetime
 import os
-import json
 import requests
 from dotenv import load_dotenv
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from database import get_all_projects, get_project_by_slug, get_all_messages, save_contact_message  # Import functions
 
 # Load environment variables
 load_dotenv()
@@ -17,13 +15,7 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": ["https://mohammadsaad.vercel.app", "http://localhost:3000"]}})
 
-limiter = Limiter(
-    get_remote_address,
-    app=app,
-    default_limits=["100 per hour", "10 per minute"]
-)
-
-# Mail configuration
+# Configure app
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
@@ -36,10 +28,111 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///portfolio.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize extensions
-mail = Mail(app)
 db = SQLAlchemy(app)
+mail = Mail(app)
 
-# **Optimized Project API**
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["100 per hour", "10 per minute"]
+)
+
+# Define models
+class ContactMessage(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False, index=True)
+    message = db.Column(db.Text, nullable=False)
+    ip_address = db.Column(db.String(45))
+    timestamp = db.Column(db.DateTime, default=db.func.current_timestamp(), index=True)
+    is_read = db.Column(db.Boolean, default=False)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'message': self.message,
+            'timestamp': self.timestamp.isoformat() if self.timestamp else None,
+            'is_read': self.is_read
+        }
+
+class Project(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False, unique=True)
+    slug = db.Column(db.String(250), nullable=False, unique=True, index=True)
+    description = db.Column(db.Text, nullable=False)
+    technologies = db.Column(db.String(500), nullable=False)
+    image_url = db.Column(db.String(500))
+    project_url = db.Column(db.String(500))
+    github_url = db.Column(db.String(500))
+    featured = db.Column(db.Boolean, default=False, index=True)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    order_priority = db.Column(db.Integer, default=0, index=True)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'slug': self.slug,
+            'description': self.description,
+            'technologies': self.technologies.split(',') if self.technologies else [],
+            'image_url': self.image_url,
+            'project_url': self.project_url,
+            'github_url': self.github_url,
+            'featured': self.featured,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+
+# Database functions
+def get_all_projects(featured=None):
+    """Retrieve projects from the database, with optional featured filter."""
+    try:
+        query = Project.query
+        if featured is not None:
+            query = query.filter_by(featured=featured)
+        projects = query.order_by(Project.order_priority.asc()).all()
+        return [project.to_dict() for project in projects]
+    except Exception as e:
+        app.logger.error(f"Database error: {str(e)}")
+        return None
+
+def get_project_by_slug(slug):
+    """Retrieve a single project by its slug."""
+    try:
+        project = Project.query.filter_by(slug=slug).first()
+        return project.to_dict() if project else None
+    except Exception as e:
+        app.logger.error(f"Database error: {str(e)}")
+        return None
+
+def get_all_messages():
+    """Fetch all contact messages ordered by newest first."""
+    try:
+        messages = ContactMessage.query.order_by(ContactMessage.timestamp.desc()).all()
+        return [message.to_dict() for message in messages]
+    except Exception as e:
+        app.logger.error(f"Database error: {str(e)}")
+        return None
+
+def save_contact_message(name, email, message_text, ip_address):
+    """Save a contact message and return success/failure."""
+    try:
+        new_message = ContactMessage(name=name, email=email, message=message_text, ip_address=ip_address)
+        db.session.add(new_message)
+        db.session.commit()
+        return True
+    except Exception as e:
+        db.session.rollback()
+        app.logger.error(f"Database error: {str(e)}")
+        return False
+
+# Utility function
+def verify_recaptcha(token):
+    # Implement your recaptcha verification
+    return True  # Replace with actual verification
+
+# Routes
 @app.route('/api/projects', methods=['GET'])
 def get_projects():
     """Retrieve all projects (optional: filter featured projects)."""
@@ -61,7 +154,6 @@ def get_single_project(slug):
         return jsonify({'status': 'success', 'project': project}), 200
     return jsonify({'status': 'error', 'message': 'Project not found'}), 404
 
-# **Optimized Contact API**
 @app.route('/api/messages', methods=['GET'])
 def get_messages():
     """Retrieve all contact messages."""
@@ -95,12 +187,10 @@ def contact():
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
-# **Health Check API**
 @app.route('/api/health', methods=['GET'])
 def health_check():
     return jsonify({'status': 'UP', 'message': 'Flask server is running!'}), 200
 
-# **Database Initialization**
 @app.before_request
 def validate_json():
     """Only enforce JSON validation on endpoints that require it."""
@@ -108,7 +198,7 @@ def validate_json():
         if not request.is_json:
             return jsonify({'status': 'error', 'message': 'Request must be JSON'}), 400
 
-# 🚀 **Run the Flask App**
+# Initialize database
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
