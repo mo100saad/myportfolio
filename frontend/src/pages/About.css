@@ -70,68 +70,47 @@
     color: var(--dark-color);
     margin-right: 0.5rem;
   }
-  
-  /* Skills Section */
-  .skills-section {
-    background-color: var(--gray-color);
-  }
-  
-  .skills-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .skill-group {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  }
-  
-  .skill-group h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
-    position: relative;
-    padding-bottom: 0.5rem;
-  }
-  
-  .skill-group h3::after {
-    content: '';
-    width: 40px;
-    height: 2px;
-    background-color: var(--primary-color);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-radius: 1px;
-  }
-  
+    /* Skill Tags (Fancy Buttons) */
   .skill-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem;
+    gap: 0.75rem;
   }
-  
+
   .skill-tag {
-    background-color: rgba(58, 134, 255, 0.1);
-    color: var(--primary-color);
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .skill-tag:hover {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, #007BFF, #00D4FF); /* Cool gradient effect */
     color: white;
-    transform: translateY(-3px);
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 123, 255, 0.2);
   }
-  
+
+  /* Cool hover effect */
+  .skill-tag:hover {
+    transform: translateY(-4px) scale(1.05);
+    background: linear-gradient(135deg, #0056b3, #00a6ff);
+    box-shadow: 0px 8px 15px rgba(0, 123, 255, 0.4);
+  }
+
+  /* Adding glowing animation */
+  @keyframes glow {
+    0% { box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3); }
+    50% { box-shadow: 0px 6px 15px rgba(0, 123, 255, 0.6); }
+    100% { box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3); }
+  }
+
+  .skill-tag:hover {
+    animation: glow 1.5s infinite alternate;
+  }
+
   /* Timeline for Education and Experience */
   .section-icon {
     margin-right: 0.5rem;

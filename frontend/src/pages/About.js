@@ -159,7 +159,8 @@ const About = () => {
                 <h3>{skillGroup.category}</h3>
                 <div className="skill-tags">
                   {skillGroup.items.map((skill, idx) => (
-                    <span key={idx} className="skill-tag">{skill}</span>
+                    <motion.span key={idx} className="skill-tag" whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }} > {skill}</motion.span>
                   ))}
                 </div>
               </div>
