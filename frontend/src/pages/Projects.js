@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './Projects.css';
-import { useApi } from '../hooks/useApi'; /*TO FIX LATER */
 
 const Projects = () => {
   
