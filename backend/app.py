@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
 from datetime import datetime
 import os
+import json
 import requests
 from dotenv import load_dotenv
 from flask_limiter import Limiter
@@ -76,7 +77,7 @@ class Project(db.Model):
             'title': self.title,
             'slug': self.slug,
             'description': self.description,
-            'technologies': self.technologies.split(',') if self.technologies else [],
+            'technologies': json.loads(self.technologies) if self.technologies else [],
             'image_url': self.image_url,
             'project_url': self.project_url,
             'github_url': self.github_url,
@@ -165,27 +166,42 @@ def get_messages():
 @app.route('/api/contact', methods=['POST'])
 @limiter.limit("3 per minute")
 def contact():
-    """Save a new contact message after validating reCAPTCHA."""
     try:
         data = request.get_json()
-        name, email, message_text, recaptcha_token = data.get('name'), data.get('email'), data.get('message'), data.get('recaptchaToken')
+        name = data.get('name')
+        email = data.get('email')
+        message_text = data.get('message')
+        recaptcha_token = data.get('recaptchaToken')
 
         if not all([name, email, message_text]):
             return jsonify({'status': 'error', 'message': 'Missing required fields'}), 400
-        
+
         if not recaptcha_token:
             return jsonify({'status': 'error', 'message': 'reCAPTCHA verification required'}), 400
-        
-        # Verify reCAPTCHA
+
         if not verify_recaptcha(recaptcha_token):
             return jsonify({'status': 'error', 'message': 'reCAPTCHA verification failed'}), 400
 
         if not save_contact_message(name, email, message_text, request.remote_addr):
             return jsonify({'status': 'error', 'message': 'Failed to save message'}), 500
 
+        # --- Email Sending Code ---
+        recipient_email = os.getenv('EMAIL_USER')
+        subject = f"New Contact Message from {name}"
+        body = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message_text}"
+        msg = Message(subject=subject, recipients=[recipient_email], body=body)
+        try:
+            mail.send(msg)
+        except Exception as e:
+            app.logger.error(f"Email sending failed: {str(e)}")
+            # Optionally, you can still return success if saving is more important
+            return jsonify({'status': 'error', 'message': 'Message saved, but failed to send email.'}), 500
+
         return jsonify({'status': 'success', 'message': 'Message sent successfully!'}), 200
+
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
