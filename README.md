@@ -19,14 +19,14 @@ Welcome to my **personal portfolio website**! 🚀 This site showcases my **proj
 | **Technology**   | **Details**                          |
 |-----------------|----------------------------------|
 | **Frontend**    | React.js, CSS                    |
-| **Backend**     | Python, Flask                    |
+| **Backend**     | Python, Flask, SQLite            |
 | **Hosting**     | GitHub Pages / Vercel / Netlify  |
 | **Version Control** | Git & GitHub                 |
 
 ---
 
 ## 🚀 Live Demo
-👉 **[Visit my portfolio](https://your-portfolio-link.com)** <!-- Replace with your actual hosted URL -->
+👉 **[Visit my portfolio](https://mohammadsaad.vercel.app)** <!-- Replace with your actual hosted URL -->
 
 ---
 
