@@ -116,7 +116,7 @@ For more details, check the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 ---
 
 ## 📜 License
-This project is **MIT Licensed**. See the [LICENSE](LICENSE) file for details.
+This project is **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International** license. See the [LICENSE](LICENSE) file for details.
 
 ---
 
