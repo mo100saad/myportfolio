@@ -2,7 +2,7 @@
 
 ![Portfolio Preview](demoimages/website.png) 
 
-Welcome to my **personal portfolio website**! 🚀 This site showcases my **projects, skills, and experience** as a **Computer Science student specializing in AI & Machine Learning**. Built using **React.js and Tailwind CSS**, it is hosted online for easy access.
+Welcome to my **personal portfolio website**! 🚀 This site showcases my **projects, skills, and experience** as a **Computer Science student specializing in AI & Machine Learning**. Built using **React.js**, it is hosted online for easy access on **Vercel**. For the back-end and database implementation, I used a mix of **Python, SQL, Flask, and Render** to host the **Backend**!
 
 ---
 
@@ -16,11 +16,11 @@ Welcome to my **personal portfolio website**! 🚀 This site showcases my **proj
 ---
 
 ## 🛠️ Tech Stack
-| **Technology**   | **Details**                          |
+| **Technology**   | **Details**                     |
 |-----------------|----------------------------------|
 | **Frontend**    | React.js, CSS                    |
 | **Backend**     | Python, Flask, SQLite            |
-| **Hosting**     | GitHub Pages / Vercel / Netlify  |
+| **Hosting**     | Vercel (FrontEnd) / Render (BackEnd) |
 | **Version Control** | Git & GitHub                 |
 
 ---
@@ -76,9 +76,9 @@ Want to personalize this portfolio? Modify the following files:
 
 | **File** | **Purpose** |
 |----------|------------|
-| `src/components/About.js` | Update your bio and skills |
-| `src/components/Projects.js` | Add new projects with descriptions and links |
-| `src/assets/images/` | Change profile picture and portfolio images |
+| `src/About.js` | Update your bio and skills |
+| `src/Projects.js` | Add new projects with descriptions and links |
+| `src/files/` | Change profile picture and portfolio images |
 
 ---
 
@@ -116,7 +116,7 @@ For more details, check the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 ---
 
 ## 📜 License
-This project is **MIT Licensed**. See the [LICENSE](LICENSE) file for details.
+This project is **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International** license. See the [LICENSE](LICENSE) file for details.
 
 ---
 
